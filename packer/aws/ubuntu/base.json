@@ -3,7 +3,7 @@
     "aws_access_key":  "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key":  "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "atlas_username":  "{{env `ATLAS_USERNAME`}}",
-    "us_east_1_ami":   "ami-9a562df2",
+    "us_east_1_ami":   "ami-6610390c",
     "name":            "aws-ubuntu-base",
     "us_east_1_name":  "aws-us-east-1-ubuntu-base",
     "ssh_username":    "ubuntu",
