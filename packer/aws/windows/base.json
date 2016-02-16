@@ -7,7 +7,7 @@
     "region":            "us-east-1",
     "vpc_id":            "",
     "subnet_id":         "",
-    "source_ami":        "ami-cd9339a6",
+    "source_ami":        "ami-dff0d3b5",
     "instance_type":     "t2.micro",
     "winrm_username":    "Administrator",
     "user_data_file":    "packer/scripts/windows/config/ec2_user_data.conf",
