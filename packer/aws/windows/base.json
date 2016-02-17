@@ -48,7 +48,7 @@
     {
       "type": "powershell",
       "scripts": [
-        "{{user `scripts_dir`}}/install_web_server.ps1",
+        "{{user `scripts_dir`}}/install_choco.ps1",
         "{{user `scripts_dir`}}/install_windows_updates.ps1"
       ]
     },
