@@ -12,7 +12,7 @@
     "winrm_username":    "Administrator",
     "user_data_file":    "scripts/windows/config/ec2_user_data.conf",
     "scripts_dir":       "scripts/windows",
-    "consul_config_dir": "C:\\etc\\consul.d"
+    "consul_config_dir": "C:\\ProgramData\\consul\\consul.d"
   },
   "push": {
     "name": "{{user `atlas_username`}}/{{user `name`}}",
@@ -48,36 +48,31 @@
     {
       "type": "powershell",
       "scripts": [
+        "{{user `scripts_dir`}}/install_windows_updates.ps1"
+      ]
+    },
+    {
+      "type": "windows-restart",
+      "restart_command": "powershell \"& {(Get-WmiObject win32_operatingsystem).LastBootUpTime > C:\\ProgramData\\lastboot.txt; Restart-Computer -force}\"",
+      "restart_check_command": "powershell -command \"& {if ((get-content C:\\ProgramData\\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Waiting for restart'; start-sleep 600} else {Write-Output 'Restart complete'}}\""
+    },
+    {
+      "type": "powershell",
+      "scripts": [
+        "{{user `scripts_dir`}}/install_windows_updates.ps1"
+      ]
+    },
+    {
+      "type": "windows-restart",
+      "restart_command": "powershell \"& {(Get-WmiObject win32_operatingsystem).LastBootUpTime > C:\\ProgramData\\lastboot.txt; Restart-Computer -force}\"",
+      "restart_check_command": "powershell -command \"& {if ((get-content C:\\ProgramData\\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Waiting for restart'; start-sleep 600} else {Write-Output 'Restart complete'}}\""
+    },
+    {
+      "type": "powershell",
+      "scripts": [
+        "{{user `scripts_dir`}}/set_ec2_config.ps1",
         "{{user `scripts_dir`}}/install_choco.ps1",
-        "{{user `scripts_dir`}}/install_windows_updates.ps1"
-      ]
-    },
-    {
-      "type": "windows-restart",
-      "restart_command": "powershell \"& {(Get-WmiObject win32_operatingsystem).LastBootUpTime > C:\\ProgramData\\lastboot.txt; Restart-Computer -force}\"",
-      "restart_check_command": "powershell -command \"& {if ((get-content C:\\ProgramData\\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Waiting for restart'; start-sleep 600} else {Write-Output 'Restart complete'}}\""
-    },
-    {
-      "type": "powershell",
-      "scripts": [
-        "{{user `scripts_dir`}}/install_windows_updates.ps1"
-      ]
-    },
-    {
-      "type": "windows-restart",
-      "restart_command": "powershell \"& {(Get-WmiObject win32_operatingsystem).LastBootUpTime > C:\\ProgramData\\lastboot.txt; Restart-Computer -force}\"",
-      "restart_check_command": "powershell -command \"& {if ((get-content C:\\ProgramData\\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Waiting for restart'; start-sleep 600} else {Write-Output 'Restart complete'}}\""
-    },
-    {
-      "type": "powershell",
-      "scripts": [
-        "{{user `scripts_dir`}}/set_ec2_config.ps1"
-      ]
-    },
-    {
-      "type": "powershell",
-      "scripts": [
-        "{{user `scripts_dir`}}/install_choco_packages.ps1"
+        "{{user `scripts_dir`}}/install_packages_base.ps1"
       ]
     },
     {
@@ -90,12 +85,6 @@
       "type": "file",
       "source": "{{user `scripts_dir`}}/consul_client.json",
       "destination": "{{user `consul_config_dir`}}\\config.json"
-    },
-    {
-      "type": "powershell",
-      "scripts": [
-        "{{user `scripts_dir`}}/install_consul.ps1"
-      ]
     }
   ],
   "post-processors": [
