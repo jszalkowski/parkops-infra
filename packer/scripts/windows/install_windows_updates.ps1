@@ -6,18 +6,17 @@ Write-Output "Starting PSWindowsUpdate Installation"
 # Install PSWindowsUpdate for scriptable Windows Updates
 $webDeployURL = "https://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc/file/41459/43/PSWindowsUpdate.zip"
 $filePath = "$($env:TEMP)\PSWindowsUpdate.zip"
-
 (New-Object System.Net.WebClient).DownloadFile($webDeployURL, $filePath)
 
-$shell = New-Object -ComObject Shell.Application
-$zipFile = $shell.NameSpace($filePath)
-$destinationFolder = $shell.NameSpace("C:\Program Files\WindowsPowerShell\Modules")
+$destinationFolder = "C:\Program Files\WindowsPowerShell\Modules\"
+[System.Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem')
+[System.IO.Compression.ZipFile]::ExtractToDirectory($filePath, $destinationFolder)
 
 $copyFlags = 0x00
 $copyFlags += 0x04 # Hide progress dialogs
 $copyFlags += 0x10 # Overwrite existing files
 
-$destinationFolder.CopyHere($zipFile.Items(), $copyFlags)
+#$destinationFolder.CopyHere($zipFile.Items(), $copyFlags)
 # Clean up
 Remove-Item -Force -Path $filePath
 
