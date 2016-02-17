@@ -10,8 +10,8 @@
     "subnet_id":      "",
     "instance_type":  "t2.micro",
     "winrm_username": "Administrator",
-    "user_data_file": "packer/scripts/windows/config/ec2_user_data.conf",
-    "scripts_dir":    "packer/scripts/windows",
+    "user_data_file": "scripts/windows/config/ec2_user_data.conf",
+    "scripts_dir":    "scripts/windows",
     "slug_app_dir":   "app/"
   },
   "push": {
