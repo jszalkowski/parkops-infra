@@ -47,7 +47,9 @@
     {
       "type": "powershell",
       "scripts": [
-        "{{user `scripts_dir`}}/set_ec2_config.ps1"
+        "{{user `scripts_dir`}}/set_ec2_config.ps1",
+        "{{user `scripts_dir`}}/install_executor_packages.ps1"
+      ]
       ]
     },
     {
@@ -60,17 +62,6 @@
       "type": "file",
       "source": "{{user `slug_app_dir`}}",
       "destination": "C:\\{{user `name`}}"
-    },
-    {
-      "type": "powershell",
-      "inline": [
-        "Import-Module WebAdministration",
-        "Clear-ItemProperty \"IIS:\\Sites\\Default Web Site\" -Name bindings",
-        "Remove-Website -Name \"Default Web Site\"",
-        "New-Item \"IIS:\\AppPools\\{{user `name`}} AppPool\"",
-        "New-Item IIS:\\Sites\\{{user `name`}} -physicalPath C:\\{{user `name`}} -bindings @{protocol=\"http\";bindingInformation=\":80:\"}",
-        "Set-ItemProperty IIS:\\Sites\\{{user `name`}} -name applicationPool -value \"{{user `name`}} AppPool\""
-      ]
     }
   ],
   "post-processors": [
