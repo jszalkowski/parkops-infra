@@ -2,8 +2,8 @@
 # General
 #--------------------------------------------------------------
 
-domain            = "REPLACE_IN_ATLAS" # e.g. hashicorpdemo.com
-atlas_username    = "REPLACE_IN_ATLAS"
+domain            = "parkops.site" # e.g. hashicorpdemo.com
+atlas_username    = "parkops"
 atlas_environment = "aws-global"
 name              = "global"
 region            = "us-east-1"
