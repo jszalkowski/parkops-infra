@@ -76,6 +76,12 @@
     },
     {
       "type": "powershell",
+      "scripts": [
+        "{{user `scripts_dir`}}/install_choco_packages.ps1"
+      ]
+    },
+    {
+      "type": "powershell",
       "inline": [
         "New-Item -Path {{user `consul_config_dir`}} -ItemType Directory -Force"
       ]
