@@ -160,8 +160,8 @@ module "data" {
   vault_node_count    = "${var.vault_node_count}"
   vault_instance_type = "${var.vault_instance_type}"
 
-  toadexec_amis       = "${module.artifact_toadexec.amis}"
-  toadexec_node_count = "${var.toadexec_node_count}"
+  toadexec_amis          = "${module.artifact_toadexec.amis}"
+  toadexec_node_count    = "${var.toadexec_node_count}"
   toadexec_instance_type = "${var.toadexec_instance_type}"
 }
 
