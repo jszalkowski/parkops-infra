@@ -19,14 +19,14 @@ region            = "us-east-1"
 sub_domain        = "us-east-1.aws"
 atlas_environment = "aws-us-east-1-prod"
 atlas_aws_global  = "aws-global"
-atlas_token       = "REPLACE_IN_ATLAS"
-atlas_username    = "REPLACE_IN_ATLAS"
-site_public_key   = "REPLACE_IN_ATLAS"
-site_private_key  = "REPLACE_IN_ATLAS"
-site_ssl_cert     = "REPLACE_IN_ATLAS"
-site_ssl_key      = "REPLACE_IN_ATLAS"
-vault_ssl_cert    = "REPLACE_IN_ATLAS"
-vault_ssl_key     = "REPLACE_IN_ATLAS"
+#atlas_token       = "REPLACE_IN_ATLAS"
+atlas_username    = "parkops"
+#site_public_key   = "REPLACE_IN_ATLAS"
+#site_private_key  = "REPLACE_IN_ATLAS"
+#site_ssl_cert     = "REPLACE_IN_ATLAS"
+#site_ssl_key      = "REPLACE_IN_ATLAS"
+#vault_ssl_cert    = "REPLACE_IN_ATLAS"
+#vault_ssl_key     = "REPLACE_IN_ATLAS"
 vault_token       = "REPLACE_IN_ATLAS" # No need to update until Vault is configured
 
 #--------------------------------------------------------------
@@ -40,7 +40,7 @@ ephemeral_subnets = "10.139.11.0/24,10.139.12.0/24,10.139.13.0/24" # Creating on
 public_subnets    = "10.139.101.0/24,10.139.102.0/24,10.139.103.0/24" # Creating one public subnet per AZ
 
 # Bastion
-bastion_instance_type = "t2.micro"
+bastion_instance_type = "t2.nano"
 
 # NAT
 nat_instance_type = "t2.micro"
@@ -59,7 +59,7 @@ openvpn_cidr          = "172.27.139.0/24"
 
 # Consul
 consul_node_count    = "3"
-consul_instance_type = "t2.small"
+consul_instance_type = "t2.micro"
 consul_artifact_name = "aws-us-east-1-ubuntu-consul"
 consul_artifacts     = "latest,latest,latest" # Comma separated list of artifact version numbers, list length must match node count
 
@@ -72,8 +72,7 @@ vault_artifacts     = "latest,latest" # Comma separated list of artifact version
 # Toadexec
 toadexec_node_count    = "1"
 toadexec_instance_type = "t2.micro"
-#toadexec_artifact_name = "aws-us-east-1-windows-toadexec"
-toadexec_artifact_name = " aws-windows-web"
+toadexec_artifact_name = "aws-us-east-1-ubuntu-toadexec"
 
 toadexec_artifacts     = "latest,latest" # Comma separated list of artifact version numbers, list length must match node count
 
@@ -86,7 +85,7 @@ haproxy_instance_type = "t2.micro"
 haproxy_artifact_name = "aws-us-east-1-ubuntu-haproxy"
 haproxy_artifacts     = "latest" # Comma separated list of artifact version numbers, list length must match node count
 
-nodejs_blue_node_count     = "2"
+nodejs_blue_node_count     = "0"
 nodejs_blue_instance_type  = "t2.micro"
 nodejs_blue_weight         = "100"
 nodejs_green_node_count    = "0"

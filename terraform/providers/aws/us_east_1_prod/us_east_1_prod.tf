@@ -160,9 +160,6 @@ module "data" {
   vault_node_count    = "${var.vault_node_count}"
   vault_instance_type = "${var.vault_instance_type}"
 
-  toadexec_amis          = "${module.artifact_toadexec.amis}"
-  toadexec_node_count    = "${var.toadexec_node_count}"
-  toadexec_instance_type = "${var.toadexec_instance_type}"
 }
 
 module "artifact_toadexec" {
@@ -220,6 +217,10 @@ module "compute" {
   haproxy_amis          = "${module.artifact_haproxy.amis}"
   haproxy_node_count    = "${var.haproxy_node_count}"
   haproxy_instance_type = "${var.haproxy_instance_type}"
+
+  toadexec_amis          = "${module.artifact_toadexec.amis}"
+  toadexec_node_count    = "${var.toadexec_node_count}"
+  toadexec_instance_type = "${var.toadexec_instance_type}"
 
   nodejs_blue_ami            = "${element(split(",", module.artifact_nodejs.amis), 0)}"
   nodejs_blue_node_count     = "${var.nodejs_blue_node_count}"

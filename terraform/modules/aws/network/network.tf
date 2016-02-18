@@ -40,6 +40,13 @@ module "public_subnet" {
   azs    = "${var.azs}"
 }
 
+module "public_db_subnet_group" {
+  source      = "./db_subnet_group"
+  name        = "${var.name}-public"
+  description = "${var.name}-public"
+  subnet_ids  = "${module.public_subnet.subnet_ids}"
+}
+
 module "bastion" {
   source = "./bastion"
 
@@ -145,6 +152,10 @@ output "vpc_cidr" { value = "${module.vpc.vpc_cidr}" }
 output "public_subnet_ids"    { value = "${module.public_subnet.subnet_ids}" }
 output "private_subnet_ids"   { value = "${module.private_subnet.subnet_ids}" }
 output "ephemeral_subnet_ids" { value = "${module.ephemeral_subnets.subnet_ids}" }
+
+# DB Subnet Groups
+output "public_db_subnet_id"  { value = "${module.public_db_subnet_group.id}" }
+output "public_db_subnet_arn" { value = "${module.public_db_subnet_group.arn}" }
 
 # Bastion
 output "bastion_user"       { value = "${module.bastion.user}" }

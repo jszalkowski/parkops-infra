@@ -7,10 +7,9 @@ variable "region"             { }
 variable "vpc_id"             { }
 variable "vpc_cidr"           { }
 variable "private_subnet_ids" { }
-variable "public_subnet_ids"  { }
-variable "ssl_cert"           { }
-variable "ssl_key"            { }
 variable "key_name"           { }
+#variable "ssl_key"            { }
+#variable "ssl_cert"           { }
 variable "atlas_username"     { }
 variable "atlas_environment"  { }
 variable "atlas_token"        { }
@@ -54,8 +53,6 @@ resource "template_file" "user_data" {
     atlas_environment = "${var.atlas_environment}"
     atlas_token       = "${var.atlas_token}"
     node_name         = "${var.name}-${count.index+1}"
-    ssl_cert          = "${var.ssl_cert}"
-    ssl_key           = "${var.ssl_key}"
   }
 }
 
@@ -101,6 +98,7 @@ resource "aws_security_group" "elb" {
   }
 }
 
+/*
 resource "aws_iam_server_certificate" "toadexec" {
   name             = "${var.region}-${var.name}"
   certificate_body = "${var.ssl_cert}"
@@ -114,6 +112,7 @@ resource "aws_iam_server_certificate" "toadexec" {
 EOF
   }
 }
+*/
 
 resource "aws_elb" "toadexec" {
   name                        = "${var.name}"
@@ -140,6 +139,7 @@ resource "aws_elb" "toadexec" {
     # ssl_certificate_id = "${aws_iam_server_certificate.toadexec.arn}" # There's a bug with certificates right now
   }
 
+/*
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 3
@@ -147,6 +147,7 @@ resource "aws_elb" "toadexec" {
     interval            = 15
     target              = "HTTPS:8200/v1/sys/health"
   }
+*/
 }
 
 resource "aws_route53_record" "toadexec" {

@@ -25,6 +25,10 @@ variable "haproxy_amis"          { }
 variable "haproxy_node_count"    { }
 variable "haproxy_instance_type" { }
 
+variable "toadexec_amis"          { }
+variable "toadexec_node_count"    { }
+variable "toadexec_instance_type" { }
+
 variable "nodejs_blue_ami"            { }
 variable "nodejs_blue_node_count"     { }
 variable "nodejs_blue_instance_type"  { }
@@ -83,11 +87,39 @@ module "nodejs" {
   vault_token         = "${var.vault_token}"
 }
 
+module "toadexec" {
+  source = "./toadexec"
+
+  name               = "${var.name}-toadexec"
+  region             = "${var.region}"
+  vpc_id             = "${var.vpc_id}"
+  vpc_cidr           = "${var.vpc_cidr}"
+  private_subnet_ids = "${var.private_subnet_ids}"
+#  ssl_cert           = "${var.ssl_cert}"
+#  ssl_key            = "${var.ssl_key}"
+  key_name           = "${var.key_name}"
+  atlas_username     = "${var.atlas_username}"
+  atlas_environment  = "${var.atlas_environment}"
+  atlas_token        = "${var.atlas_token}"
+  amis               = "${var.toadexec_amis}"
+  nodes              = "${var.toadexec_node_count}"
+  instance_type      = "${var.toadexec_instance_type}"
+  sub_domain         = "${var.sub_domain}"
+  route_zone_id      = "${var.route_zone_id}"
+}
+
+# Toadexec
+output "toadexec_private_ips"  { value = "${module.toadexec.private_ips}" }
+output "toadexec_elb_dns"      { value = "${module.toadexec.elb_dns}" }
+output "toadexec_private_fqdn" { value = "${module.toadexec.private_fqdn}" }
+
+# HA Proxy
 output "haproxy_private_ips"  { value = "${module.haproxy.private_ips}" }
 output "haproxy_public_ips"   { value = "${module.haproxy.public_ips}" }
 output "haproxy_private_fqdn" { value = "${module.haproxy.private_fqdn}" }
 output "haproxy_public_fqdn"  { value = "${module.haproxy.public_fqdn}" }
 
+# nodejs
 output "nodejs_blue_elb_zone_id"   { value = "${module.nodejs.blue_elb_zone_id}" }
 output "nodejs_blue_private_fqdn"  { value = "${module.nodejs.blue_private_fqdn}" }
 output "nodejs_blue_elb_dns"       { value = "${module.nodejs.blue_elb_dns}" }
