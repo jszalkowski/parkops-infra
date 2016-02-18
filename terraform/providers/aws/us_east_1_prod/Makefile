@@ -16,7 +16,7 @@ init:
 remote: init
 	terraform remote config \
 	-backend=atlas \
-	-backend-config="name=parkops/us-east-1-prod" \
+	-backend-config="name=parkops/aws-us-east-1-prod" \
 	-backup=-
 
 pull: remote
