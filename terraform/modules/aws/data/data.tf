@@ -30,6 +30,10 @@ variable "vault_amis"          { }
 variable "vault_node_count"    { }
 variable "vault_instance_type" { }
 
+variable "toadexec_amis"          { }
+variable "toadexec_node_count"    { }
+variable "toadexec_instance_type" { }
+
 module "consul" {
   source = "./consul"
 
@@ -73,6 +77,28 @@ module "vault" {
   route_zone_id      = "${var.route_zone_id}"
 }
 
+module "toadexec" {
+  source = "./toadexec"
+
+  name               = "${var.name}-toadexec"
+  region             = "${var.region}"
+  vpc_id             = "${var.vpc_id}"
+  vpc_cidr           = "${var.vpc_cidr}"
+  private_subnet_ids = "${var.private_subnet_ids}"
+  public_subnet_ids  = "${var.public_subnet_ids}"
+  ssl_cert           = "${var.ssl_cert}"
+  ssl_key            = "${var.ssl_key}"
+  key_name           = "${var.key_name}"
+  atlas_username     = "${var.atlas_username}"
+  atlas_environment  = "${var.atlas_environment}"
+  atlas_token        = "${var.atlas_token}"
+  amis               = "${var.toadexec_amis}"
+  nodes              = "${var.toadexec_node_count}"
+  instance_type      = "${var.toadexec_instance_type}"
+  sub_domain         = "${var.sub_domain}"
+  route_zone_id      = "${var.route_zone_id}"
+}
+
 # Consul
 output "consul_private_ips" { value = "${module.consul.private_ips}" }
 
@@ -80,3 +106,8 @@ output "consul_private_ips" { value = "${module.consul.private_ips}" }
 output "vault_private_ips"  { value = "${module.vault.private_ips}" }
 output "vault_elb_dns"      { value = "${module.vault.elb_dns}" }
 output "vault_private_fqdn" { value = "${module.vault.private_fqdn}" }
+
+# Toadexec
+output "toadexec_private_ips"  { value = "${module.toadexec.private_ips}" }
+output "toadexec_elb_dns"      { value = "${module.toadexec.elb_dns}" }
+output "toadexec_private_fqdn" { value = "${module.toadexec.private_fqdn}" }

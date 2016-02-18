@@ -39,6 +39,11 @@ variable "vault_instance_type" { }
 variable "vault_artifact_name" { }
 variable "vault_artifacts"     { }
 
+variable "toadexec_node_count"    { }
+variable "toadexec_instance_type" { }
+variable "toadexec_artifact_name" { }
+variable "toadexec_artifacts"     { }
+
 variable "haproxy_node_count"    { }
 variable "haproxy_instance_type" { }
 variable "haproxy_artifact_name" { }
@@ -154,6 +159,20 @@ module "data" {
   vault_amis          = "${module.artifact_vault.amis}"
   vault_node_count    = "${var.vault_node_count}"
   vault_instance_type = "${var.vault_instance_type}"
+
+  toadexec_amis       = "${module.artifact_toadexec.amis}"
+  toadexec_node_count = "${var.toadexec_node_count}"
+  toadexec_instance_type = "${var.toadexec_instance_type}"
+}
+
+module "artifact_toadexec" {
+  source = "../../../modules/aws/util/artifact"
+
+  type             = "${var.artifact_type}"
+  region           = "${var.region}"
+  atlas_username   = "${var.atlas_username}"
+  artifact_name    = "${var.vault_artifact_name}"
+  artifact_version = "${var.vault_artifacts}"
 }
 
 module "artifact_haproxy" {

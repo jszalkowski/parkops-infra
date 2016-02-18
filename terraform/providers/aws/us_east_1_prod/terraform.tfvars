@@ -69,6 +69,12 @@ vault_instance_type = "t2.micro"
 vault_artifact_name = "aws-us-east-1-ubuntu-vault"
 vault_artifacts     = "latest,latest" # Comma separated list of artifact version numbers, list length must match node count
 
+# Toadexec
+toadexec_node_count    = "1"
+toadexec_instance_type = "t2.micro"
+toadexec_artifact_name = "aws-us-east-1-windows-toadexec"
+toadexec_artifacts     = "latest,latest" # Comma separated list of artifact version numbers, list length must match node count
+
 #--------------------------------------------------------------
 # Compute
 #--------------------------------------------------------------
