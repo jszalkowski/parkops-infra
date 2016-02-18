@@ -3,7 +3,7 @@
     "aws_access_key":    "{{env `AWS_ACCESS_KEY`}}",
     "aws_secret_key":    "{{env `AWS_SECRET_KEY`}}",
     "atlas_username":    "{{env `ATLAS_USERNAME`}}",
-    "name":              "aws-windows-base",
+    "name":              "aws-{{env `AWS_DEFAULT_REGION`}}-windows-base",
     "region":            "us-east-1",
     "vpc_id":            "",
     "subnet_id":         "",
