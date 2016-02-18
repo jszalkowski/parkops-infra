@@ -171,8 +171,8 @@ module "artifact_toadexec" {
   type             = "${var.artifact_type}"
   region           = "${var.region}"
   atlas_username   = "${var.atlas_username}"
-  artifact_name    = "${var.vault_artifact_name}"
-  artifact_version = "${var.vault_artifacts}"
+  artifact_name    = "${var.toadexec_artifact_name}"
+  artifact_version = "${var.toadexec_artifacts}"
 }
 
 module "artifact_haproxy" {
