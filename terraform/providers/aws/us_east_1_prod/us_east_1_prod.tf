@@ -165,7 +165,8 @@ module "data" {
 module "artifact_toadexec" {
   source = "../../../modules/aws/util/artifact"
 
-  type             = "${var.artifact_type}"
+  #type             = "${var.artifact_type}"
+  type             = "amazon.ami"
   region           = "${var.region}"
   atlas_username   = "${var.atlas_username}"
   artifact_name    = "${var.toadexec_artifact_name}"
