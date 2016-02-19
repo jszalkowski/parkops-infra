@@ -48,8 +48,7 @@
       "type": "powershell",
       "scripts": [
         "{{user `scripts_dir`}}/set_ec2_config.ps1",
-        "{{user `scripts_dir`}}/install_packages_toadexec.ps1",
-        "{{user `scripts_dir`}}/install_packages_toad.ps1"
+        "{{user `scripts_dir`}}/install_packages_toadexec.ps1"
       ]
     },
     {
@@ -68,7 +67,7 @@
     {
       "type": "atlas",
       "artifact": "{{user `atlas_username`}}/{{user `name`}}",
-      "artifact_type": "amazon.ami",
+      "artifact_type": "amazon.image",
       "metadata": {
         "created_at": "{{timestamp}}"
       }

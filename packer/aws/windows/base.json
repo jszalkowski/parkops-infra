@@ -7,7 +7,7 @@
     "region":            "us-east-1",
     "vpc_id":            "vpc-1bd59e7f",
     "subnet_id":         "subnet-cf5ee1b9",
-    "source_ami":        "ami-dff0d3b5",
+    "source_ami":        "ami-3586ac5f",
     "instance_type":     "c3.large",
     "winrm_username":    "Administrator",
     "user_data_file":    "scripts/windows/config/ec2_user_data.conf",
@@ -91,7 +91,7 @@
     {
       "type": "atlas",
       "artifact": "{{user `atlas_username`}}/{{user `name`}}",
-      "artifact_type": "amazon.ami",
+      "artifact_type": "amazon.image",
       "metadata": {
         "created_at": "{{timestamp}}"
       }
