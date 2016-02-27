@@ -3,6 +3,8 @@
     "aws_access_key":    "{{env `AWS_ACCESS_KEY`}}",
     "aws_secret_key":    "{{env `AWS_SECRET_KEY`}}",
     "atlas_username":    "{{env `ATLAS_USERNAME`}}",
+    "local_username":    "{{env `LOCAL_USERNAME`}}",
+    "local_password":    "{{env `LOCAL_PASSWORD`}}",
     "name":              "aws-{{env `AWS_DEFAULT_REGION`}}-windows-base",
     "region":            "us-east-1",
     "vpc_id":            "vpc-1bd59e7f",
@@ -16,7 +18,7 @@
   },
   "push": {
     "name": "{{user `atlas_username`}}/{{user `name`}}",
-    "base_dir": "../../../.",
+    "base_dir": "../../.",
     "include": [
       "{{user `user_data_file`}}",
       "{{user `scripts_dir`}}/*"
@@ -73,6 +75,15 @@
         "{{user `scripts_dir`}}/set_ec2_config.ps1",
         "{{user `scripts_dir`}}/install_choco.ps1",
         "{{user `scripts_dir`}}/install_packages_base.ps1"
+      ]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "Import-Module 'Carbon'",
+        "$credential = New-Credential -UserName {{user `local_username`}} -Password '{{user `local_password`}}'",
+        "Install-User -Credential $credential -Description 'Local Admin by Powershell'",
+        "Add-GroupMember -Name Administrators -Member {{user `local_username`}}"
       ]
     },
     {

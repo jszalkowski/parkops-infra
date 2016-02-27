@@ -1,22 +1,26 @@
 {
   "variables": {
-    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
-    "atlas_username": "{{env `ATLAS_USERNAME`}}",
-    "base_ami":       "{{env `ATLAS_BASE_ARTIFACT_AMAZON_AMI_ID`}}",
-    "name":           "aws-{{env `AWS_DEFAULT_REGION`}}-windows-toadexec",
-    "region":         "us-east-1",
-    "vpc_id":         "vpc-1bd59e7f",
-    "subnet_id":      "subnet-cf5ee1b9",
-    "instance_type":  "c3.large",
-    "winrm_username": "Administrator",
-    "user_data_file": "scripts/windows/config/ec2_user_data.conf",
-    "scripts_dir":    "scripts/windows",
-    "slug_app_dir":   "app/"
+    "aws_access_key":    "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key":    "{{env `AWS_SECRET_KEY`}}",
+    "aws_smtp_username": "{{env `AWS_SMTP_USERNAME`}}",
+    "aws_smtp_password": "{{env `AWS_SMTP_PASSWORD`}}",
+    "atlas_username":    "{{env `ATLAS_USERNAME`}}",
+    "base_ami":          "{{env `ATLAS_BASE_ARTIFACT_AMAZON_AMI_ID`}}",
+    "local_username":    "{{env `LOCAL_USERNAME`}}",
+    "local_password":    "{{env `LOCAL_PASSWORD`}}",
+    "name":              "aws-{{env `AWS_DEFAULT_REGION`}}-windows-toadexec",
+    "region":            "us-east-1",
+    "vpc_id":            "vpc-1bd59e7f",
+    "subnet_id":         "subnet-cf5ee1b9",
+    "instance_type":     "c3.large",
+    "winrm_username":    "Administrator",
+    "user_data_file":    "scripts/windows/config/ec2_user_data.conf",
+    "scripts_dir":       "scripts/windows",
+    "slug_app_dir":      "app/"
   },
   "push": {
     "name": "{{user `atlas_username`}}/{{user `name`}}",
-    "base_dir": "../../../.",
+    "base_dir": "../../.",
     "include": [
       "{{user `scripts_dir`}}/*"
     ],
@@ -49,6 +53,14 @@
       "scripts": [
         "{{user `scripts_dir`}}/set_ec2_config.ps1",
         "{{user `scripts_dir`}}/install_packages_toadexec.ps1"
+      ]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "Import-Module 'Carbon'",
+        "Install-User -Username '{{user `local_username`}}' -Description 'LocalAdmin' -FullName 'Local Admin by Powershell' -Password '{{user `local_password`}}'",
+        "Add-GroupMember -Name 'Administrators' -Member '{{user `local_username`}}'"
       ]
     },
     {

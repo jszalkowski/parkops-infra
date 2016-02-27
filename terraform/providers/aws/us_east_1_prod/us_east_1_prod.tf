@@ -165,8 +165,7 @@ module "data" {
 module "artifact_toadexec" {
   source = "../../../modules/aws/util/artifact"
 
-  #type             = "${var.artifact_type}"
-  type             = "amazon.ami"
+  type             = "${var.artifact_type}"
   region           = "${var.region}"
   atlas_username   = "${var.atlas_username}"
   artifact_name    = "${var.toadexec_artifact_name}"
@@ -305,5 +304,6 @@ Visit the HAProxy stats page:
 Interact with Vault:
   Vault: ${module.data.vault_private_fqdn}
          ${module.data.vault_elb_dns}
+
 CONFIGURATION
 }
