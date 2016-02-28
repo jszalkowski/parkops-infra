@@ -42,9 +42,6 @@ public_subnets    = "10.139.101.0/24,10.139.102.0/24,10.139.103.0/24" # Creating
 # Bastion
 bastion_instance_type = "t2.nano"
 
-# NAT
-nat_instance_type = "t2.micro"
-
 # OpenVPN - https://docs.openvpn.net/how-to-tutorialsguides/virtual-platforms/amazon-ec2-appliance-ami-quick-start-guide/
 openvpn_instance_type = "t2.micro"
 openvpn_ami           = "ami-5fe36434"
@@ -69,11 +66,13 @@ vault_instance_type = "t2.micro"
 vault_artifact_name = "aws-us-east-1-ubuntu-vault"
 vault_artifacts     = "latest,latest" # Comma separated list of artifact version numbers, list length must match node count
 
-# toadexec
-toadexec_node_count    = "1"
-toadexec_instance_type = "t2.micro"
-toadexec_artifact_name = "aws-us-east-1-windows-toadexec"
-toadexec_artifacts     = "latest"
+# PkRPT
+pkrpt_allocated_storage = "5"
+pkrpt_engine            = "mysql"
+pkrpt_engine_version    = "5.7.10"
+pkrpt_family            = "mysql5.6"
+pkrpt_instance_class    = "db.t2.micro"
+#pkrpt_password         = "REPLACE_IN_ATLAS"
 
 #--------------------------------------------------------------
 # Compute
@@ -92,3 +91,9 @@ nodejs_green_instance_type = "t2.micro"
 nodejs_green_weight        = "0"
 nodejs_artifact_name       = "aws-us-east-1-ubuntu-nodejs"
 nodejs_artifacts           = "latest,latest" # Comma separated "blue,green" artifact version numbers, list length must be 2
+
+# toadexec
+toadexec_node_count    = "1"
+toadexec_instance_type = "t2.micro"
+toadexec_artifact_name = "aws-us-east-1-windows-toadexec"
+toadexec_artifacts     = "latest"

@@ -2,6 +2,7 @@
   "variables": {
     "aws_access_key":    "{{env `AWS_ACCESS_KEY`}}",
     "aws_secret_key":    "{{env `AWS_SECRET_KEY`}}",
+    "aws_smtp_server":   "email-smtp.us-east-1.amazonaws.com",
     "aws_smtp_username": "{{env `AWS_SMTP_USERNAME`}}",
     "aws_smtp_password": "{{env `AWS_SMTP_PASSWORD`}}",
     "atlas_username":    "{{env `ATLAS_USERNAME`}}",

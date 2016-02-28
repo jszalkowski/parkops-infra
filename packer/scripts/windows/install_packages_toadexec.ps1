@@ -5,3 +5,4 @@ choco install awstools.powershell
 choco install git.install
 choco install golang
 choco install nodejs.install
+choco install rclone
