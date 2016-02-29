@@ -64,6 +64,8 @@ resource "aws_route53_record" "pkrpt" {
   type    = "CNAME"
   ttl     = "5"
   records = ["${aws_db_instance.pkrpt.address}"]
+
+  depends_on = ["aws_db_instance.pkrpt"]
 }
 
 resource "aws_db_parameter_group" "pkrpt" {

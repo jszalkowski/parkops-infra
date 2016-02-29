@@ -66,11 +66,11 @@ vault_instance_type = "t2.micro"
 vault_artifact_name = "aws-us-east-1-ubuntu-vault"
 vault_artifacts     = "latest,latest" # Comma separated list of artifact version numbers, list length must match node count
 
-# PkRPT
+# pkrpt
 pkrpt_allocated_storage = "5"
 pkrpt_engine            = "mysql"
 pkrpt_engine_version    = "5.7.10"
-pkrpt_family            = "mysql5.6"
+pkrpt_family            = "mysql5.7"
 pkrpt_instance_class    = "db.t2.micro"
 #pkrpt_password         = "REPLACE_IN_ATLAS"
 
